@@ -4,15 +4,21 @@
     box-sizing: border-box;
 }
 
+/* Default styles */
 body {
     font-family: 'Continuum', sans-serif;
-    background-color: #F0F0F0;
+    background-color: #A3C8E4; /* Light blue color for the Wii background */
+    background-image: url('path-to-your-wii-background-image.jpg'); /* Optional: Background image */
+    background-size: cover; /* Ensures the image covers the entire background */
+    background-position: center; /* Centers the image */
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     overflow: hidden;
     animation: fadeIn 1s ease-in-out;
+    cursor: url(https://cur.cursors-4u.net/games/gam-12/gam1113.cur), auto !important; /* Default cursor */
+    color: black; /* Default text color for light mode */
 }
 
 @keyframes fadeIn {
@@ -21,10 +27,15 @@ body {
 }
 
 .container {
+    width: 90vw;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     text-align: center;
-    background-color: #FFFFFF;
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background for the container */
     border-radius: 20px;
-    padding: 20px;
+    padding: 40px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     animation: floatUp 1s ease-in-out;
 }
@@ -34,39 +45,116 @@ body {
     100% { transform: translateY(0); opacity: 1; }
 }
 
+header {
+    color: black; /* Default header color for light mode */
+}
+
 header h1 {
-    color: #0099FF;
+    color: #0099FF; /* Change header color for light mode */
     margin-bottom: 30px;
+    font-size: 2rem;
 }
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    flex-grow: 1;
+    justify-items: center;
+    align-items: center;
 }
 
 .card {
-    background-color: #E0E0E0;
-    border-radius: 15px;
-    padding: 40px;
+    position: relative; /* Make the card position relative */
+    width: 250px;
+    height: 180px;
+    background-color: #E0E0E0; /* Light card background */
+    border-radius: 25px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
     animation: float 3s infinite ease-in-out;
+    cursor: pointer;
+    color: black; /* Text color for light mode */
+    text-shadow: none; /* No text shadow in light mode */
+    text-decoration: none; /* Remove underline from links */
+    overflow: hidden; /* Hide overflow to contain the blur effect */
 }
 
-@keyframes float {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0); }
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 25px; /* Match the card's border radius */
+    background-size: cover; /* Cover the entire card */
+    background-position: center; /* Center the image */
+    filter: blur(4px); /* Apply blur to the background image */
+    opacity: 0.8; /* Slightly fade the image */
+    z-index: 0; /* Ensure the image is below the text */
+}
+
+.card1::before {
+    background-image: url('path-to-your-image1.jpg'); /* Background image for card 1 */
+}
+
+.card2::before {
+    background-image: url('path-to-your-image2.jpg'); /* Background image for card 2 */
+}
+
+.card3::before {
+    background-image: url('path-to-your-image3.jpg'); /* Background image for card 3 */
 }
 
 .card:hover {
     transform: scale(1.1);
-    background-color: #FFFFFF;
+}
+
+.card:hover::before {
+    filter: none; /* Remove blur on hover */
+    opacity: 1; /* Restore full opacity on hover */
 }
 
 footer p {
-    margin-top: 20px;
-    color: #666666;
+    color: black; /* Footer text color for light mode */
+    padding: 20px;
     animation: fadeIn 2s ease-in-out;
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #2C2C2C; /* Dark background color */
+        background-image: none; /* Remove background image if desired */
+        color: white; /* Default text color for dark mode */
+    }
+
+    header {
+        color: white; /* Header color for dark mode */
+    }
+
+    header h1 {
+        color: #00BFFF; /* Keep this for dark mode if you want a brighter shade */
+    }
+
+    .container {
+        background-color: rgba(40, 40, 40, 0.9); /* Dark semi-transparent background for the container */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Darker shadow for the container */
+    }
+
+    .card {
+        background-color: #4A4A4A; /* Darker card background */
+        color: white; /* White text for cards in dark mode */
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Optional: Text shadow for better visibility */
+    }
+
+    footer p {
+        color: #CCCCCC; /* Lighter footer text in dark mode */
+    }
 }
