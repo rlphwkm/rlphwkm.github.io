@@ -9,9 +9,30 @@
     <link rel="author" href="https://rlphwkm.github.io"/>
     <link rel="stylesheet" href="styles.css"> <!-- Ensure this points to your CSS file -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome CDN -->
+    <script src="script.js" defer></script> <!-- Link to your JavaScript file -->
 </head>
 
 <body>
+    <audio id="background-music" loop>
+        <source src="items/sounds/background-music.wav" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
+
+    <audio id="launch-sound" preload="auto">
+        <source src="items/sounds/start-sound.wav" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
+
+    <audio id="hover-sound" preload="auto">
+        <source src="items/sounds/hover-sound.wav" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
+
+    <audio id="click-sound" preload="auto">
+        <source src="items/sounds/select-sound.wav" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
+
     <div class="container">
         <header>
             <h1>My Portfolio</h1>
@@ -19,27 +40,27 @@
         <section class="grid">
             <a href="./aboutme/index.html" class="card card1">
                 <i class="fas fa-user"></i>
-                <span>About Me</span> <!-- Text to show on hover -->
+                <span>About Me</span>
             </a>
             <a href="./projects/index.html" class="card card2">
                 <i class="fas fa-folder-open"></i>
-                <span>Projects</span> <!-- Text to show on hover -->
+                <span>Projects</span>
             </a>
             <a href="./skills/index.html" class="card card3">
                 <i class="fas fa-cogs"></i>
-                <span>Skills</span> <!-- Text to show on hover -->
+                <span>Skills</span>
             </a>
             <a href="./contacts/index.html" class="card card4">
                 <i class="fas fa-address-card"></i>
-                <span>Contact Information</span> <!-- Text to show on hover -->
+                <span>Contact Information</span>
             </a>
             <a href="./hite/index.html" class="card card5">
                 <i class="fas fa-briefcase"></i>
-                <span>Hire Me</span> <!-- Text to show on hover -->
+                <span>Hire Me</span>
             </a>
             <a href="https://google.com" class="card card6">
                 <i class="fas fa-globe"></i>
-                <span>Browser</span> <!-- Text to show on hover -->
+                <span>Browser</span>
             </a>
         </section>
         <footer>

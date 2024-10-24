@@ -17,7 +17,7 @@ body {
     color: black; /* Default text color for light mode */
     
     /* Default cursor for the whole page */
-    cursor: url(https://cur.cursors-4u.net/games/gam-12/gam1113.cur), auto !important;
+    cursor: url(./items/cursors/wii-player1.cur), auto !important;
 }
 
 @keyframes fadeIn {
@@ -81,26 +81,30 @@ header h1 {
     top: 50%; /* Center vertically */
     left: 50%; /* Center horizontally */
     transform: translate(-50%, -50%); /* Adjust to center */
-    color: rgba(0, 153, 255, 0.7); /* Icon color */
+    color: rgba(0, 155, 255, 0.7); /* Icon color */
     z-index: 1; /* Ensure icon is behind text */
+    transition: opacity 0.3s ease; /* Smooth transition for icon */
+    opacity: 1; /* Initially visible */
 }
 
 .card span {
     position: relative; /* For text layering */
     z-index: 2; /* Ensure text is above icon */
-    display: none; /* Hide text by default */
+    opacity: 0; /* Start hidden */
+    transition: opacity 0.4s ease; /* Smooth transition for text */
 }
 
+/* Scale effect on hover */
 .card:hover {
     transform: scale(1.1);
 }
 
 .card:hover i {
-    display: none; /* Hide icon on hover */
+    opacity: 0; /* Fade out icon on hover */
 }
 
 .card:hover span {
-    display: block; /* Show text on hover */
+    opacity: 1; /* Fade in text on hover */
 }
 
 footer p {
@@ -132,14 +136,4 @@ footer p {
     footer p {
         color: #CCCCCC; /* Lighter footer text in dark mode */
     }
-}
-
-/* Cursor on hover over buttons */
-.card:hover {
-    cursor: url(https://cur.cursors-4u.net/games/gam-12/gam1112.cur), auto !important;
-}
-
-/* Cursor on click/hold on buttons */
-.card:active {
-    cursor: url(https://cur.cursors-4u.net/games/gam-12/gam1101.cur), auto !important;
 }
