@@ -4,6 +4,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const launchSound = document.getElementById('launch-sound');
     const hoverSound = document.getElementById('hover-sound');
     const clickSound = document.getElementById('click-sound');
+    const stopHoverSound = new Audio('items/sounds/stop-hover-sound.wav'); // Add the sound for stopping hover
+
+    backgroundMusic.volume = 0.60;
 
     // Variable to track if the background music has been played
     let backgroundMusicPlayed = false;
@@ -32,6 +35,12 @@ document.addEventListener("DOMContentLoaded", function () {
             hoverSound.currentTime = 0; // Reset sound to start
             hoverSound.play().catch(error => {
                 console.error("Error playing hover sound:", error);
+            });
+        });
+
+        card.addEventListener('mouseleave', () => {
+            stopHoverSound.play().catch(error => {
+                console.error("Error playing stop hover sound:", error);
             });
         });
 
