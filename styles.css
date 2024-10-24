@@ -74,20 +74,15 @@ header h1 {
 
 .card i {
     font-size: 5rem; /* Large icon size */
-    position: absolute; /* Positioning for better layout */
-    top: 50%; /* Center vertically */
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Adjust to center */
     color: rgba(0, 153, 255, 0.7); /* Icon color */
     z-index: 1; /* Ensure icon is behind text */
     transition: opacity 0.3s ease; /* Smooth transition for opacity */
-    opacity: 0; /* Start hidden */
 }
 
 .card span {
-    position: relative; /* For text layering */
+    position: absolute; /* Positioning for text overlay */
     z-index: 2; /* Ensure text is above icon */
-    opacity: 1; /* Start visible */
+    opacity: 0; /* Start hidden */
     transition: opacity 0.3s ease; /* Smooth transition for opacity */
     font-size: 1.5rem; /* Adjust font size for visibility */
 }
@@ -97,11 +92,11 @@ header h1 {
 }
 
 .card:hover i {
-    opacity: 1; /* Show icon on hover */
+    opacity: 0; /* Hide icon on hover */
 }
 
 .card:hover span {
-    opacity: 0; /* Hide text on hover */
+    opacity: 1; /* Show text on hover */
 }
 
 footer p {
