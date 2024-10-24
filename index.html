@@ -3,74 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ralph Wakim Portfolio</title>
-    <meta name="description" content="Contact Information for Ralph Wakim. This is a form of business card for Ralph Wakim.">
-    <meta name="keywords" content="Ralph, Wakim, Ralph Wakim, Information, Contact, Contact Information, rlphwkm, rlphwkm info, rlphwkm information">
-    <link rel="author" href="https://rlphwkm.github.io"/>
-    <link rel="stylesheet" href="styles.css"> <!-- Ensure this points to your CSS file -->
+    <title>Disclaimer</title>
+    <meta name="description" content="Disclaimer page for Ralph Wakim's portfolio.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome CDN -->
-    <script src="script.js" defer></script> <!-- Link to your JavaScript file -->
+    <script>
+        // Redirect to the original portfolio page
+        document.addEventListener("click", function() {
+            window.location.href = "pages/index.html"; 
+        });
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: url(items/cursors/wii-player1.cur), auto !important;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black; /* Background color */
+            color: white;
+            font-family: 'Continuum', sans-serif;
+            text-align: center;
+            padding: 20px; /* Padding around the content */
+        }
+
+        h1 {
+            font-size: 5rem;
+            margin-bottom: 20px; /* Space below the heading */
+        }
+
+        p {
+            font-size: 2.4rem;
+            margin: 10px 0; /* Space above and below paragraphs */
+        }
+
+        .warning-icon {
+            color: #FFCC00; /* Yellow color for warning icon */
+            margin-right: 10px; /* Space between icon and text */
+        }
+
+        a {
+            color: white; /* Hyperlink color */
+            text-decoration: none; /* No underline */
+            font-weight: bold; /* Make the link text bold */
+        }
+
+        a:hover {
+            text-decoration: none; /* No underline on hover */
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 4rem; /* Smaller font size on small screens */
+            }
+            p {
+                font-size: 1.8rem; /* Smaller font size on small screens */
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <audio id="background-music" loop>
-        <source src="items/sounds/background-music.wav" type="audio/wav">
-        Your browser does not support the audio element.
-    </audio>
-
-    <audio id="launch-sound" preload="auto">
-        <source src="items/sounds/start-sound.wav" type="audio/wav">
-        Your browser does not support the audio element.
-    </audio>
-
-    <audio id="hover-sound" preload="auto">
-        <source src="items/sounds/hover-sound.wav" type="audio/wav">
-        Your browser does not support the audio element.
-    </audio>
-
-    <audio id="stop-hover-sound" preload="auto">
-        <source src="items/sounds/stop-hover-sound.wav" type="audio/wav"> <!-- Add this line -->
-        Your browser does not support the audio element.
-    </audio>
-
-    <audio id="click-sound" preload="auto">
-        <source src="items/sounds/select-sound.wav" type="audio/wav">
-        Your browser does not support the audio element.
-    </audio>
-
-    <div class="container">
-        <header>
-            <h1>My Portfolio</h1>
-        </header>
-        <section class="grid">
-            <a href="./aboutme/index.html" class="card card1">
-                <i class="fas fa-user"></i>
-                <span>About Me</span>
-            </a>
-            <a href="./projects/index.html" class="card card2">
-                <i class="fas fa-folder-open"></i>
-                <span>Projects</span>
-            </a>
-            <a href="./skills/index.html" class="card card3">
-                <i class="fas fa-cogs"></i>
-                <span>Skills</span>
-            </a>
-            <a href="./contacts/index.html" class="card card4">
-                <i class="fas fa-address-card"></i>
-                <span>Contact Information</span>
-            </a>
-            <a href="./hite/index.html" class="card card5">
-                <i class="fas fa-briefcase"></i>
-                <span>Hire Me</span>
-            </a>
-            <a href="https://google.com" class="card card6">
-                <i class="fas fa-globe"></i>
-                <span>Browser</span>
-            </a>
-        </section>
-        <footer>
-            <p> Ralph Wakim  |   &copy; 2024    </p>
-        </footer>
+    <div>
+        <h1><i class="fas fa-exclamation-triangle warning-icon"></i>DISCLAIMER</h1>
+        <br>
+        <br>
+        <p>BEFORE PROCEEDING, READ YOUR OPERATIONS</p>
+        <p>MANUAL FOR IMPORTANT INFORMATION</p>
+        <p>ABOUT THIS SOFTWARE.</p>
+        <br>
+        <br>
+        <p>Also online at <a href="https://github.com/rlphwkm/rlphwkm.github.io/blob/main/README.md" target="_blank">rlphwkm.github.io</a></p>
+        <br>
+        <br>
+        <p>Click anywhere to proceed.</p>
     </div>
 </body>
 </html>

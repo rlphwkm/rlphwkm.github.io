@@ -1,8 +1,7 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    cursor: url(../items/cursors/wii-player1.cur), auto !important;
 }
+
 
 /* Default styles */
 body {
@@ -16,8 +15,6 @@ body {
     animation: fadeIn 1s ease-in-out;
     color: black; /* Default text color for light mode */
     
-    /* Default cursor for the whole page */
-    cursor: url(./items/cursors/wii-player1.cur), auto !important;
 }
 
 @keyframes fadeIn {

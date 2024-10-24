@@ -1,0 +1,12 @@
+.about-content {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: black; /* Text color for light mode */
+}
+
+@media (prefers-color-scheme: dark) {
+    .about-content {
+        color: white; /* Text color for dark mode */
+    }
+}

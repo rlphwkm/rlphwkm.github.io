@@ -4,9 +4,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const launchSound = document.getElementById('launch-sound');
     const hoverSound = document.getElementById('hover-sound');
     const clickSound = document.getElementById('click-sound');
-    const stopHoverSound = new Audio('items/sounds/stop-hover-sound.wav'); // Add the sound for stopping hover
+    const stopHoverSound = new Audio('items/sounds/stop-hover-sound.wav');
 
-    backgroundMusic.volume = 0.60;
+    backgroundMusic.volume = 0.10; // adjusts background music level
 
     // Variable to track if the background music has been played
     let backgroundMusicPlayed = false;
