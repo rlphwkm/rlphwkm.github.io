@@ -1,3 +1,7 @@
+* {
+    cursor: url(../items/cursors/obiwan-lightsaber-cursor.cur), auto !important;
+}
+
 body {
     background-color: black;
     color: white;
@@ -33,27 +37,26 @@ body {
 }
 
 .title {
-    font-size: 3em;
-    color: lightblue;
-    font-family: 'Star Wars', sans-serif;
+    font-size: 2.5em;
+    color: white;
     text-align: center;
     text-shadow: 0 0 5px lightblue, 0 0 10px lightblue;
-    position: relative;
-    animation: pulsate-border 1.5s infinite;
-    padding: 10px;
-    border: 3px solid transparent;
+    animation: pulse 2s infinite alternate;
+    font-family: 'Star Wars', sans-serif;
+    padding: 20px;
 }
 
-@keyframes pulsate-border {
-    0%, 100% { border-color: transparent; }
-    50% { border-color: lightblue; }
+@keyframes pulse {
+    0% { opacity: 0.8; }
+    100% { opacity: 1; }
 }
 
 .button {
     background: rgba(0, 0, 0, 0.5);
     border: 2px solid white;
+    width: 200px; /* Set a fixed width for all buttons */
     border-radius: 5px;
-    padding: 15px 30px;
+    padding: 25px 60px;
     margin: 10px 0;
     text-align: center;
     text-decoration: none;
@@ -63,13 +66,11 @@ body {
 }
 
 .button:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: white;
+    color: black;
 }
 
-.profile-pic {
-    border-radius: 50%;
-    width: 150px;
-    height: 150px;
-    margin-bottom: 20px;
-    border: 3px solid lightblue;
+footer p {
+    color: white;
+    padding: 20px;
 }
