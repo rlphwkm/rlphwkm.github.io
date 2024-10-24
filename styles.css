@@ -80,15 +80,28 @@ header h1 {
     transform: translate(-50%, -50%); /* Adjust to center */
     color: rgba(0, 153, 255, 0.7); /* Icon color */
     z-index: 1; /* Ensure icon is behind text */
+    transition: opacity 0.3s ease; /* Smooth transition for opacity */
+    opacity: 0; /* Start hidden */
 }
 
 .card span {
     position: relative; /* For text layering */
     z-index: 2; /* Ensure text is above icon */
+    opacity: 1; /* Start visible */
+    transition: opacity 0.3s ease; /* Smooth transition for opacity */
+    font-size: 1.5rem; /* Adjust font size for visibility */
 }
 
 .card:hover {
-    transform: scale(1.1);
+    transform: scale(1.1); /* Scale up card on hover */
+}
+
+.card:hover i {
+    opacity: 1; /* Show icon on hover */
+}
+
+.card:hover span {
+    opacity: 0; /* Hide text on hover */
 }
 
 footer p {
