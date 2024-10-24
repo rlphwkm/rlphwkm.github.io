@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const clickSound = document.getElementById('click-sound');
     const stopHoverSound = new Audio('items/sounds/stop-hover-sound.wav');
 
-    backgroundMusic.volume = 0.10; // adjusts background music level
+    backgroundMusic.volume = 0.10; // Adjusts background music level
 
     // Variable to track if the background music has been played
     let backgroundMusicPlayed = false;
@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         card.addEventListener('mouseleave', () => {
+            stopHoverSound.currentTime = 0; // Reset sound to start
             stopHoverSound.play().catch(error => {
                 console.error("Error playing stop hover sound:", error);
             });
