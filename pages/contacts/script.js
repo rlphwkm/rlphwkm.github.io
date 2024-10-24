@@ -11,3 +11,13 @@ const starField = document.querySelector('.stars');
             star.style.animationDuration = `${Math.random() * 2 + 1}s`;
             starField.appendChild(star);
         }
+
+const buttons = document.querySelectorAll('.button');
+const hoverSound = document.getElementById('lightsaber-hover-sound');
+
+buttons.forEach(button => {
+  button.addEventListener('mouseover', () => {
+    hoverSound.currentTime = 0; // Reset sound to start
+    hoverSound.play(); // Play sound
+  });
+});
