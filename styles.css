@@ -15,6 +15,9 @@ body {
     overflow: hidden;
     animation: fadeIn 1s ease-in-out;
     color: black; /* Default text color for light mode */
+    
+    /* Default cursor for the whole page */
+    cursor: url(https://cur.cursors-4u.net/games/gam-12/gam1113.cur), auto !important;
 }
 
 @keyframes fadeIn {
@@ -74,29 +77,30 @@ header h1 {
 
 .card i {
     font-size: 5rem; /* Large icon size */
+    position: absolute; /* Positioning for better layout */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust to center */
     color: rgba(0, 153, 255, 0.7); /* Icon color */
     z-index: 1; /* Ensure icon is behind text */
-    transition: opacity 0.3s ease; /* Smooth transition for opacity */
 }
 
 .card span {
-    position: absolute; /* Positioning for text overlay */
+    position: relative; /* For text layering */
     z-index: 2; /* Ensure text is above icon */
-    opacity: 0; /* Start hidden */
-    transition: opacity 0.3s ease; /* Smooth transition for opacity */
-    font-size: 1.5rem; /* Adjust font size for visibility */
+    display: none; /* Hide text by default */
 }
 
 .card:hover {
-    transform: scale(1.1); /* Scale up card on hover */
+    transform: scale(1.1);
 }
 
 .card:hover i {
-    opacity: 0; /* Hide icon on hover */
+    display: none; /* Hide icon on hover */
 }
 
 .card:hover span {
-    opacity: 1; /* Show text on hover */
+    display: block; /* Show text on hover */
 }
 
 footer p {
@@ -128,4 +132,14 @@ footer p {
     footer p {
         color: #CCCCCC; /* Lighter footer text in dark mode */
     }
+}
+
+/* Cursor on hover over buttons */
+.card:hover {
+    cursor: url(https://cur.cursors-4u.net/games/gam-12/gam1112.cur), auto !important;
+}
+
+/* Cursor on click/hold on buttons */
+.card:active {
+    cursor: url(https://cur.cursors-4u.net/games/gam-12/gam1101.cur), auto !important;
 }
