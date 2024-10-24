@@ -6,7 +6,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const clickSound = document.getElementById('click-sound');
     const stopHoverSound = new Audio('items/sounds/stop-hover-sound.wav');
 
-    backgroundMusic.volume = 0.10; // Adjusts background music level
+    backgroundMusic.volume = 0.25; // Adjusts background music level
+    launchSound.volume = 0.50; // adjusts launch sound level
 
     // Variable to track if the background music has been played
     let backgroundMusicPlayed = false;
@@ -20,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 setTimeout(() => {
                     backgroundMusic.loop = true; // Ensure it loops
                     backgroundMusic.play(); // Play background music
-                }, 3000); // Wait 3000 ms (3 seconds)
+                }, 4000); // Wait 4000 ms (4 seconds)
                 backgroundMusicPlayed = true; // Set flag to true to avoid replaying
             }).catch(error => {
                 console.error("Error playing launch sound:", error);
