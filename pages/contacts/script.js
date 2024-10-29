@@ -21,3 +21,9 @@ buttons.forEach(button => {
     hoverSound.play(); // Play sound
   });
 });
+
+document.addEventListener("click", function() {
+  const backgroundMusic = document.getElementById("background-music");
+  backgroundMusic.volume = 0.5; // Set volume
+  backgroundMusic.play();
+}, { once: true });

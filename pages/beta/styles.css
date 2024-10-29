@@ -1,8 +1,10 @@
+* {cursor: url(../items/cursors/full-moon-cursor.cur), auto !important;}
+
 body {
     margin: 0;
     font-family: 'Courier New', Courier, monospace;
     transition: background-color 0.5s, color 0.5s;
-    overflow: hidden; /* Prevent scrolling */
+    color: white
 }
 
 .background {
@@ -11,16 +13,18 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-size: cover;
-    background-position: center;
-    opacity: 0.8; /* Semi-transparent */
-    z-index: -1; /* Send background behind content */
+    background-image: url('../items/pics/8bit-background.jpg'); /* Add your background image */
+    background-size: cover; /* Cover the entire background */
+    background-position: center; /* Center the image */
+    z-index: -1; /* Keep it behind other elements */
 }
 
 .container {
     text-align: center;
     padding: 20px;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(0.5px);
+    position: relative; /* Allow content to overlay the background */
+    z-index: 1; /* Ensure the content is above the background */
 }
 
 h1 {
@@ -49,31 +53,24 @@ h1 {
     color: red;
 }
 
-.half {
-    position: relative;
-    color: red;
-}
-
-.half:before {
-    content: "❤️";
-    position: absolute;
-    left: 0;
-    clip: rect(0, 12px, 24px, 0); /* Adjust for heart shape */
-    color: red;
-}
-
 .empty {
     color: rgb(179, 179, 179);
 }
 
-.light {
-    background-color: #ffffff;
-    color: black;
-    background-image: url('../items/pics/game-background-light.png'); /* Replace with your light mode image path */
+#expand-button {
+    background-color: #404040; /* background */
+    color: white; /*  text */
+    border: 2px solid #404040; /*  border */
+    padding: 15px 30px; /* Padding for larger button */
+    font-size: 18px; /* Larger font size */
+    cursor: pointer; /* Pointer cursor */
+    box-shadow: 0 0 5px #1e1e1e, 0 0 10px #2a2a2a; /* Glowing effect */
+    transition: all 0.3s; /* Smooth transition */
+    border-radius: 15px; /* Rounded corners */
 }
 
-.dark {
-    background-color: #121212;
-    color: white;
-    background-image: url('../items/pics/game-background-dark.png'); /* Replace with your dark mode image path */
+#expand-button:hover {
+    background-color: #494949; /* Darker green on hover */
+    box-shadow: 0 0 15px #4f4f4f, 0 0 20px #6e6e6e; /* Increased glow on hover */
+    cursor: url(../items/cursors/full-moon-cursor.cur), auto !important; /* hover cursor */
 }
