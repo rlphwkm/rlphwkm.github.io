@@ -134,3 +134,39 @@ footer p {
         color: #CCCCCC; /* Lighter footer text in dark mode */
     }
 }
+
+
+
+/* Ensure proper scaling on mobile */
+@media only screen and (max-width: 768px) {
+    .container {
+        width: 95vw;
+        height: auto;
+        padding: 20px;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, 1fr); /* Two columns on smaller screens */
+        gap: 20px; /* Reduce gap size */
+    }
+
+    .card {
+        width: 150px;
+        height: 120px;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .grid {
+        grid-template-columns: 1fr; /* Single column on extra-small screens */
+    }
+
+    .card {
+        width: 100%;
+        height: auto;
+    }
+}
