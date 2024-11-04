@@ -11,6 +11,10 @@
         document.addEventListener("click", function() {
             window.location.href = "pages/index.html"; 
         });
+
+        if (/Mobi|Android/i.test(navigator.userAgent)) {
+            window.location.href = "https://mobile.rlphwkm.com"
+        }
     </script>
     <style>
         * {
