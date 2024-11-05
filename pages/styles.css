@@ -91,11 +91,6 @@ body {
     opacity: 1; /* Fade in text on hover */
 }
 
-footer p {
-    color: black; /* Footer text color for light mode */
-    margin-top: auto;
-    padding: 20px;
-}
 
 /* Dark mode styles */
 @media (prefers-color-scheme: dark) {
