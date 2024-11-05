@@ -11,7 +11,7 @@ body {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    animation: fadeIn 2s ease-in-out;
+    animation: fadeIn 0.7s ease-in-out;
     color: black; /* Default text color for light mode */
 }
 
