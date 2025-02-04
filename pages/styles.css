@@ -40,13 +40,21 @@ body {
 /* Navbar */
 nav {
     background-color: var(--secondary-color);
+    width: 100%;
     padding: 15px;
-    text-align: center;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+.nav-links {
+    display: flex;
     gap: 10px;
 }
-nav a {
+.nav-links a {
     background-color: var(--primary-color);
     color: white;
     text-decoration: none;
@@ -55,8 +63,32 @@ nav a {
     font-size: 1.1em;
     transition: background-color var(--transition-speed);
 }
-nav a:hover {
+.nav-links a:hover {
     background-color: var(--accent-color);
+}
+.burger-menu {
+    display: none;
+    cursor: pointer;
+    font-size: 1.5em;
+    color: white;
+}
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: var(--secondary-color);
+        padding: 10px;
+    }
+    .nav-links.show {
+        display: flex;
+    }
+    .burger-menu {
+        display: block;
+    }
 }
 
 /* Buttons */
@@ -133,9 +165,5 @@ input, textarea {
     }
     .service-item {
         flex: 1 1 100%;
-    }
-    nav {
-        flex-direction: column;
-        gap: 5px;
     }
 }
