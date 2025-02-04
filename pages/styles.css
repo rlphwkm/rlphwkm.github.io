@@ -10,11 +10,16 @@
 }
 
 /* Dark Mode */
+[data-theme="dark"],
 @media (prefers-color-scheme: dark) {
     :root {
         --background-color: #121212;
         --text-color: #e0e0e0;
         --secondary-color: #252525;
+    }
+    body {
+        background-color: var(--background-color);
+        color: var(--text-color);
     }
 }
 
@@ -25,6 +30,11 @@ body {
     margin: 0;
     padding: 0;
     transition: background-color var(--transition-speed), color var(--transition-speed);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
 }
 
 /* Navbar */
@@ -32,16 +42,21 @@ nav {
     background-color: var(--secondary-color);
     padding: 15px;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
 nav a {
+    background-color: var(--primary-color);
     color: white;
     text-decoration: none;
-    margin: 0 15px;
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
     font-size: 1.1em;
-    transition: color var(--transition-speed);
+    transition: background-color var(--transition-speed);
 }
 nav a:hover {
-    color: var(--primary-color);
+    background-color: var(--accent-color);
 }
 
 /* Buttons */
@@ -72,6 +87,7 @@ input, textarea {
     max-width: 800px;
     margin: auto;
     padding: 20px;
+    text-align: center;
 }
 .blog-post {
     border-bottom: 1px solid #ddd;
@@ -99,6 +115,7 @@ input, textarea {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    text-align: center;
 }
 .service-item {
     background-color: var(--secondary-color);
@@ -116,5 +133,9 @@ input, textarea {
     }
     .service-item {
         flex: 1 1 100%;
+    }
+    nav {
+        flex-direction: column;
+        gap: 5px;
     }
 }
