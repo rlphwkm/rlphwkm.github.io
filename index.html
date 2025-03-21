@@ -3,73 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>rlphwkm | Home</title>
-    <link rel="stylesheet" href="./pages/styles.css">
+    <title>Disclaimer - Ralph Wakim</title>
+    <meta name="description" content="Disclaimer page for Ralph Wakim's portfolio.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome CDN -->
+    <script>
+        // Redirect to the original portfolio page
+        document.addEventListener("click", function() {
+            window.location.href = "pages/index.html"; 
+        });
+
+//        if (/Mobi|Android/i.test(navigator.userAgent)) {
+//            window.location.href = "https://rlphwkm.com"
+//        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: url(pages/items/cursors/wii-player1.cur), auto !important;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black; /* Background color */
+            color: white;
+            font-family: 'Continuum', sans-serif;
+            text-align: center;
+            padding: 20px; /* Padding around the content */
+        }
+
+        h1 {
+            font-size: 5rem;
+            margin-bottom: 20px; /* Space below the heading */
+        }
+
+        p {
+            font-size: 2.4rem;
+            margin: 10px 0; /* Space above and below paragraphs */
+        }
+
+        .warning-icon {
+            color: #FFCC00; /* Yellow color for warning icon */
+            margin-right: 10px; /* Space between icon and text */
+        }
+
+        a {
+            color: white; /* Hyperlink color */
+            text-decoration: none; /* No underline */
+            font-weight: bold; /* Make the link text bold */
+        }
+
+        a:hover {
+            text-decoration: none; /* No underline on hover */
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 4rem; /* Smaller font size on small screens */
+            }
+            p {
+                font-size: 1.8rem; /* Smaller font size on small screens */
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <header>
-        <nav>
-            <div class="logo">rlphwkm</div>
-            <ul class="nav-links">
-                <li><a href="./">Home</a></li>
-                <li><a href="./about/">About</a></li>
-                <li><a href="./services/">Services</a></li>
-                <li><a href="./blog/">Blog</a></li>
-                <li><a href="./contact/">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <section class="hero">
-        <h1>Confidentiality, Integrity, Availability</h1>
-        <p>Your Security, Our Priority.</p>
-        <a href="contact.html" class="cta-button">Get a Consultation</a>
-    </section>
-
-    <section class="about">
-        <h2>About rlphwkm</h2>
-        <p>We provide expert cybersecurity solutions, OSINT services, and security consulting to protect your business.</p>
-    </section>
-
-    <section class="services">
-        <h2>Our Services</h2>
-        <div class="service-list">
-            <div class="service">
-                <h3>Cybersecurity Consulting</h3>
-                <p>Ensuring your business is protected from cyber threats.</p>
-            </div>
-            <div class="service">
-                <h3>OSINT Services</h3>
-                <p>Gathering actionable intelligence through open-source research.</p>
-            </div>
-            <div class="service">
-                <h3>Public Safety Solutions</h3>
-                <p>Enhancing security through advanced risk assessment and planning.</p>
-            </div>
-            <div class="service">
-                <h3>Incident Response</h3>
-                <p>Rapid response to cybersecurity incidents to minimize damage.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="why-choose">
-        <h2>Why Choose Us?</h2>
-        <ul>
-            <li>Expert knowledge in cybersecurity and intelligence.</li>
-            <li>Trusted by businesses for secure and reliable solutions.</li>
-            <li>Commitment to confidentiality, integrity, and availability.</li>
-            <li>24/7 support for critical security incidents.</li>
-        </ul>
-    </section>
-
-    <section class="contact-cta">
-        <h2>Ready to Secure Your Business?</h2>
-        <a href="contact.html" class="cta-button">Contact Us</a>
-    </section>
-
-    <footer>
-        <p>&copy; 2025 rlphwkm. All rights reserved.</p>
-    </footer>
+    <div>
+        <h1><i class="fas fa-exclamation-triangle warning-icon"></i>DISCLAIMER</h1>
+        <br>
+        <br>
+        <p>BEFORE PROCEEDING, READ YOUR OPERATIONS</p>
+        <p>MANUAL FOR IMPORTANT INFORMATION</p>
+        <p>ABOUT THIS SOFTWARE.</p>
+        <br>
+        <br>
+        <p>Available online at <a href="https://github.com/rlphwkm/rlphwkm.github.io/blob/main/README.md" target="_blank">rlphwkm.github.io</a></p>
+        <br>
+        <br>
+        <p>Click anywhere to proceed.</p>
+    </div>
 </body>
 </html>

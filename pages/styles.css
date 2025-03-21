@@ -1,169 +1,185 @@
-/* Global Styles */
-:root {
-    --primary-color: #007BFF;
-    --secondary-color: #1a1a1a;
-    --background-color: #f8f9fa;
-    --text-color: #333;
-    --accent-color: #0056b3;
-    --border-radius: 8px;
-    --transition-speed: 0.3s;
+* {
+    cursor: url(./items/cursors/wii-player1.cur), auto !important;
 }
 
-/* Dark Mode */
-[data-theme="dark"],
-@media (prefers-color-scheme: dark) {
-    :root {
-        --background-color: #121212;
-        --text-color: #e0e0e0;
-        --secondary-color: #252525;
-    }
-    body {
-        background-color: var(--background-color);
-        color: var(--text-color);
-    }
-}
-
+/* Default styles */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: var(--background-color);
-    color: var(--text-color);
-    margin: 0;
-    padding: 0;
-    transition: background-color var(--transition-speed), color var(--transition-speed);
+    font-family: 'Continuum', sans-serif;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    animation: fadeIn 0.7s ease-in-out;
+    color: black; /* Default text color for light mode */
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.container {
+    width: 100vw;
+    height: calc(100vh - 50px);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
+    justify-content: space-between;
+    text-align: center;
+    background-color: transparent; /* Make container fully invisible */
+    border: none; /* Remove borders */
+    box-shadow: none; /* Remove any shadows */
 }
 
-/* Navbar */
-nav {
-    background-color: var(--secondary-color);
-    width: 100%;
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0px;
+    flex-grow: 1;
+    justify-items: center;
     align-items: center;
+}
+
+.card {
+    position: relative; /* Make the card position relative */
+    width: 280px;
+    height: 210px;
+    background-color: rgba(0, 0, 0, 0.1); /* Slightly darker to show icon */
+    border-radius: 25px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    color: black; /* Text color for light mode */
+    text-decoration: none; /* Remove underline from links */
+    overflow: hidden; /* Hide overflow to keep the icon in place */
+}
+
+.card i {
+    font-size: 5rem; /* Large icon size */
+    position: absolute; /* Positioning for better layout */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust to center */
+    color: rgba(0, 155, 255, 0.7); /* Icon color */
+    z-index: 1; /* Ensure icon is behind text */
+    transition: opacity 0.3s ease; /* Smooth transition for icon */
+    opacity: 1; /* Initially visible */
+}
+
+.card span {
+    position: relative; /* For text layering */
+    z-index: 2; /* Ensure text is above icon */
+    opacity: 0; /* Start hidden */
+    transition: opacity 0.4s ease; /* Smooth transition for text */
+}
+
+/* Scale effect on hover */
+.card:hover {
+    transform: scale(1.1);
+}
+
+.card:hover i {
+    opacity: 0; /* Fade out icon on hover */
+}
+
+.card:hover span {
+    opacity: 1; /* Fade in text on hover */
+}
+
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #2C2C2C; /* Dark background color */
+        color: white; /* Default text color for dark mode */
+    }
+
+
+    .card {
+        background-color: #4A4A4A; /* Darker card background */
+        color: white; /* White text for cards in dark mode */
+    }
+
+    footer p {
+        color: #CCCCCC; /* Lighter footer text in dark mode */
+    }
+}
+
+/* Ensure proper scaling on mobile */
+@media only screen and (max-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr); /* Two columns on smaller screens */
+        gap: 20px; /* Reduce gap size */
+    }
+
+    .card {
+        width: 150px;
+        height: 120px;
+    }
+
+}
+
+@media only screen and (max-width: 480px) {
+    .grid {
+        grid-template-columns: 1fr; /* Single column on extra-small screens */
+    }
+
+    .card {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.particles {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1000;
-}
-.nav-links {
-    display: flex;
-    gap: 10px;
-}
-.nav-links a {
-    background-color: var(--primary-color);
-    color: white;
-    text-decoration: none;
-    padding: 10px 15px;
-    border-radius: var(--border-radius);
-    font-size: 1.1em;
-    transition: background-color var(--transition-speed);
-}
-.nav-links a:hover {
-    background-color: var(--accent-color);
-}
-.burger-menu {
-    display: none;
-    cursor: pointer;
-    font-size: 1.5em;
-    color: white;
-}
-@media (max-width: 768px) {
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        background-color: var(--secondary-color);
-        padding: 10px;
-    }
-    .nav-links.show {
-        display: flex;
-    }
-    .burger-menu {
-        display: block;
-    }
-}
-
-/* Buttons */
-button {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    transition: background-color var(--transition-speed);
-}
-button:hover {
-    background-color: var(--accent-color);
-}
-
-/* Forms */
-input, textarea {
     width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: var(--border-radius);
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
 }
 
-/* Blog Page */
-.blog-container {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-    text-align: center;
-}
-.blog-post {
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-}
-.blog-post h2 {
-    color: var(--primary-color);
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    transition: transform 0.3s ease-out;
+    animation: floatParticle var(--float-duration) linear infinite;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
 }
 
-/* Contact Page */
-.contact-form {
-    max-width: 600px;
-    margin: auto;
-    padding: 20px;
-    background-color: var(--secondary-color);
-    color: white;
-    border-radius: var(--border-radius);
-}
-
-/* Services Page */
-.services-container {
-    max-width: 1000px;
-    margin: auto;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    text-align: center;
-}
-.service-item {
-    background-color: var(--secondary-color);
-    color: white;
-    padding: 15px;
-    border-radius: var(--border-radius);
-    flex: 1 1 calc(33.333% - 20px);
-    min-width: 250px;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .services-container {
-        flex-direction: column;
+/* Particle color for light theme */
+@media (prefers-color-scheme: light) {
+    .particle {
+        background: rgba(128, 128, 128, 0.6); /* White particles for light mode */
+        box-shadow: 0 0 4px rgba(128, 128, 128, 0.4);
     }
-    .service-item {
-        flex: 1 1 100%;
+}
+
+/* Particle color for dark theme */
+@media (prefers-color-scheme: dark) {
+    .particle {
+        background: rgba(0, 155, 255, 0.6); /* Blue particles for dark mode */
+        box-shadow: 0 0 4px rgba(0, 155, 255, 0.4);
+    }
+}
+
+@keyframes floatParticle {
+    0% {
+        transform: translate(var(--start-x), var(--start-y));
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--end-x), var(--end-y));
+        opacity: 0;
     }
 }
