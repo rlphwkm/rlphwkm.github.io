@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>rlphwkm | Hack the Terminal</title>
+  <link href="https://fonts.cdnfonts.com/css/satoshi?styles=135009,135005" rel="stylesheet">
+  <link rel="stylesheet" href="./lib/WOW-master/css/libs/animate.css">
+  <link rel="stylesheet" href="./lib/bootstrap-5/css/bootstrap.min.css">
+  <style>
+    :root {
+      --bg-color: rgb(17, 19, 56);
+      --text-color: rgb(185, 190, 255);
+      --prompt-color: rgb(75, 82, 199);
+      --highlight-color: rgba(75, 82, 199, 0.5);
+      --command-color: rgb(75, 82, 199);
+      --response-color: rgb(185, 190, 255);
+      --font-main: 'Satoshi', sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      height: 100%;
+      background-color: var(--bg-color);
+      font-family: var(--font-main);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .terminal {
+      width: 98vw;
+      height: 98vh;
+      background-color: #000000c0;
+      color: var(--text-color);
+      padding: 2rem;
+      border-radius: 10px;
+      border: 1px solid var(--prompt-color);
+      box-shadow: 0 0 30px var(--highlight-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      overflow: hidden;
+      animation: fadeIn 1s ease-in;
+    }
+
+    .terminal-output {
+      flex: 1;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      font-size: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    .terminal-input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: var(--prompt-color);
+      font-size: 1rem;
+      outline: none;
+      font-weight: 500;
+      caret-color: var(--prompt-color);
+    }
+
+    .terminal-input::placeholder {
+      color: rgba(185,190,255,0.4);
+      font-style: italic;
+    }
+
+    .prompt {
+      color: var(--prompt-color);
+      font-weight: bold;
+    }
+
+    .command { color: var(--command-color); font-weight: 500; }
+    .response { color: var(--response-color); }
+
+    .blinking-cursor::after {
+      content: "";
+      display: inline-block;
+      width: 8px;
+      height: 1.1em;
+      background-color: var(--prompt-color);
+      animation: blink 1s steps(2, start) infinite;
+      margin-left: 5px;
+      vertical-align: bottom;
+    }
+
+    @keyframes blink { to { visibility: hidden; } }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="terminal wow fadeIn">
+    <div class="terminal-output" id="output"></div>
+    <div>
+      <span class="prompt">RLPHWKM@terminal:~$</span>
+      <input type="text" class="terminal-input blinking-cursor" id="cli-input" autofocus autocomplete="off" placeholder="Type a command..." />
+    </div>
+  </div>
+
+  <script src="./lib/WOW-master/dist/wow.min.js"></script>
+  <script>new WOW().init();</script>
+
+  <script>
+    const input = document.getElementById('cli-input');
+    const output = document.getElementById('output');
+  
+    let stage = 0;
+    let loginStep = 0;
+    let enteredUsername = "";
+  
+    const commands = {
+      help: `Available commands:
+  - help → show available commands
+  - clear → clear the terminal
+  - login → begin hacking sequence
+  - quit → exit the game
+  - hint → need a little push?`,
+      hint: "Stage 1: Try logging in with a strong password... something super strong 😉",
+    };
+  
+    const typeLine = async (text = "", prefix = "", isCommand = false) => {
+      const line = document.createElement("div");
+      if (prefix) line.innerHTML = `<span class="prompt">${prefix}</span>`;
+      const span = document.createElement("span");
+      span.className = isCommand ? "command" : "response";
+      line.appendChild(span);
+      output.appendChild(line);
+      let i = 0;
+      return new Promise(resolve => {
+        const typer = setInterval(() => {
+          span.textContent += text[i++];
+          output.scrollTop = output.scrollHeight;
+          if (i >= text.length) {
+            clearInterval(typer);
+            resolve();
+          }
+        }, 20);
+      });
+    };
+  
+    const resetLogin = async () => {
+      loginStep = 0;
+      enteredUsername = "";
+      await typeLine("Login reset. Type 'login' to try again.");
+    };
+  
+    const handleCommand = async (cmd) => {
+      await typeLine(cmd, "RLPHWKM@terminal:~$", true);
+      const normalized = cmd.trim().toLowerCase();
+  
+      // Global commands
+      if (normalized === "clear") {
+        output.innerHTML = "";
+        return;
+      }
+      if (normalized === "help") {
+        await typeLine(commands.help);
+        return;
+      }
+      if (normalized === "hint") {
+        await typeLine(commands.hint);
+        return;
+      }
+      if (normalized === "quit") {
+        await typeLine("Exiting terminal session...");
+        await new Promise(r => setTimeout(r, 1000));
+        window.location.href = "./";
+        return;
+      }
+  
+      // Stage 0: Start login
+      if (stage === 0) {
+        if (normalized === "login") {
+          stage = 1;
+          loginStep = 1;
+          await typeLine("Enter username:");
+        } else {
+          await typeLine("Unknown command. Type 'help'.");
+        }
+        return;
+      }
+  
+      // Stage 1: Login authentication
+      if (stage === 1) {
+        if (loginStep === 1) {
+          enteredUsername = cmd;
+          loginStep = 2;
+          await typeLine("Enter password:");
+          return;
+        }
+        if (loginStep === 2) {
+          if (cmd === "5up3r5tr0ngp4ssw0rd") {
+            await typeLine("Access Granted.");
+            await typeLine("Welcome, " + enteredUsername + ".");
+            stage = 2;
+            loginStep = 0;
+            await typeLine("Level 1 complete. Use 'ls' to begin your exploration.");
+          } else {
+            await typeLine("Access Denied. That password isn't strong enough.");
+            await resetLogin();
+          }
+          return;
+        }
+      }
+  
+      // Stage 2: File system exploration
+      if (stage === 2) {
+        if (normalized === "ls") {
+          await typeLine("index.html  secret.txt  firewall.config");
+        } else if (normalized === "cat secret.txt") {
+          await typeLine("The code is: R3D_H34RT");
+        } else if (normalized === "use r3d_h34rt") {
+          await typeLine("Verifying...");
+          await new Promise(r => setTimeout(r, 1000));
+          await typeLine("✅ Code accepted.");
+          await typeLine("Initializing port scanner...");
+          stage = 3;
+          await typeLine("Use 'nmap localhost' to continue.");
+        } else {
+          await typeLine("command not found: " + cmd);
+        }
+        return;
+      }
+  
+      // Stage 3: Port scanning and SSH
+      if (stage === 3) {
+        if (normalized === "nmap localhost") {
+          await typeLine("Starting Nmap 7.93 ( https://nmap.org )");
+          await new Promise(r => setTimeout(r, 1000));
+          await typeLine("PORT     STATE  SERVICE");
+          await typeLine("22/tcp   open   ssh");
+          await typeLine("80/tcp   open   http");
+          await typeLine("443/tcp  closed https");
+          await typeLine("");
+          await typeLine("Connection options discovered.");
+          await typeLine("Try 'ssh root@localhost -p 22'");
+        } else if (normalized === "ssh root@localhost -p 22") {
+          await typeLine("Establishing secure connection...");
+          await new Promise(r => setTimeout(r, 1500));
+          await typeLine("Access granted to secured system.");
+          await typeLine(" ");
+          await typeLine("🎉 Game complete.");
+          await typeLine("Congratulations, seems you have what it takes to be a hacker!");
+          await typeLine("You have successfully 'hacked' into my website.");
+          await typeLine("I hope you enjoyed this fun little game I made for nerds like me.");
+          await typeLine("If you found this interesting, reach out and let me know!");
+        } else {
+          await typeLine("command not found: " + cmd);
+        }
+        return;
+      }
+  
+      // Fallback for unexpected behavior
+      await typeLine("Unknown command. Type 'help' if you’re stuck.");
+    };
+  
+    let history = [];
+    let historyIndex = -1;
+  
+    input.addEventListener("keydown", async function(e) {
+      if (e.key === "Enter") {
+        const cmd = input.value.trim();
+        if (cmd !== "") {
+          history.push(cmd);
+          historyIndex = history.length;
+        }
+        input.value = "";
+        await handleCommand(cmd);
+      } else if (e.key === "ArrowUp") {
+        if (historyIndex > 0) {
+          historyIndex--;
+          input.value = history[historyIndex];
+        }
+        e.preventDefault();
+      } else if (e.key === "ArrowDown") {
+        if (historyIndex < history.length - 1) {
+          historyIndex++;
+          input.value = history[historyIndex];
+        } else {
+          historyIndex = history.length;
+          input.value = "";
+        }
+        e.preventDefault();
+      }
+    });
+  
+    (async () => {
+      await typeLine("Unauthorized access detected.");
+      await typeLine("You're now inside the rlphwkm terminal.");
+      await typeLine("If you're truly a hacker, you'll find your way out...");
+      await typeLine("Type 'help' to begin.");
+    })();
+  </script>
+  
+</body>
+</html>
