@@ -52,16 +52,23 @@ There are a few **interactive secrets** embedded throughout the site. Some are v
 
 ---
 
-## Website Structure
+## 🔐 Security & Disclaimer
 
-.
-├── index.html              # Main homepage
-├── 404.html                # CLI-style terminal hacking mini-game 👀
+This website is educational and demonstrative in nature. While it may simulate certain security tools and techniques, no actual penetration testing or real-world systems are involved.
+
+Any terminal-like interfaces, mini-games, or simulated hacking content are fictional and intended to raise cybersecurity awareness in a fun and engaging way.
+
+---
+## 🗂️ Website Structure
+
+```text
+rlphwkm.github.io/
+├── index.html               → Main homepage
+├── 404.html                 → CLI-style terminal hacking mini-game 👀
 ├── assets/
-│   ├── images/             # Favicon, hero images, etc.
-│   ├── cursors/            # Custom animated .ani/.cur cursors
-│   ├── css/                # Custom and responsive CSS
-│   └── js/                 # Site-wide logic
-├── lib/                    # External libraries (WOW.js, Bootstrap, etc.)
-└── README.md               # You're reading it.
-
+│   ├── images/              → Favicon, hero images, etc.
+│   ├── cursors/             → Custom animated .ani/.cur cursors
+│   ├── css/                 → Custom and responsive stylesheets
+│   └── js/                  → Main JavaScript functionality
+├── lib/                     → External libraries (WOW.js, Bootstrap, Slick, etc.)
+└── README.md                → You're reading it
