@@ -65,6 +65,7 @@ Any terminal-like interfaces, mini-games, or simulated hacking content are ficti
 .
 ├── index.html               → Main homepage
 ├── 404.html                 → CLI-style terminal hacking mini-game 👀
+├── *figure it out*.html     → CLI-style terminal hacking mini-game 👀
 ├── assets/
 │   ├── images/              → Favicon, hero images, etc.
 │   ├── cursors/             → Custom animated .ani/.cur cursors
