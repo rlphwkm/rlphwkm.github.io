@@ -31,4 +31,10 @@
     <priority>0.1</priority>
   </url>
 
+  <url>
+    <loc>https://www.rlphwkm.com/you-found-an-easter-egg</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.1</priority>
+  </url>
+
 </urlset>

@@ -127,7 +127,7 @@
 - ssh → use ssh
 - quit → exit the game
 - hint → need a little push?`,
-      hint: "Stage 1: Try logging in with a strong password... something super strong 😉",
+      hint: "Stage 1: Try logging in with a strong password... something super strong that uses only number and letters 😉",
     };
 
     const typeLine = async (text = "", prefix = "", isCommand = false) => {
@@ -203,7 +203,7 @@
           return;
         }
         if (loginStep === 2) {
-          if (cmd === "5up3r5tr0ngp4ssw0rd") {
+          if (cmd === "5up3r5tr0ngp4ssw0rd") { //i hope you didnt cheat to get there
             await typeLine("Access Granted.");
             await typeLine("Welcome, " + enteredUsername + ".");
             stage = 2;
