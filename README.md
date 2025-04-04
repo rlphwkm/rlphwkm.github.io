@@ -23,7 +23,7 @@ This site represents Ralph’s professional and technical identity as a cybersec
 - 🧠 **SEO-Ready**: Semantic HTML and JSON-LD structured data
 - 🎨 **Custom UI/UX**:
   - Custom preloader with a security-themed disclaimer
-  - Custom `.ani` and `.cur` animated mouse cursors
+  - Custom `.cur` animated mouse cursors
   - Smooth WOW.js animations throughout
 - 🎯 **Focused Messaging**: The hero section delivers a concise, powerful message
 - 🔗 **Modular Layout**:
@@ -32,7 +32,6 @@ This site represents Ralph’s professional and technical identity as a cybersec
   - Experience  
   - Tools  
   - Projects  
-  - Testimonials  
   - Footer + Contact
 
 ---
