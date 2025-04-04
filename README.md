@@ -62,7 +62,7 @@ Any terminal-like interfaces, mini-games, or simulated hacking content are ficti
 ## 🗂️ Website Structure
 
 ```text
-rlphwkm.github.io/
+.
 ├── index.html               → Main homepage
 ├── 404.html                 → CLI-style terminal hacking mini-game 👀
 ├── assets/
