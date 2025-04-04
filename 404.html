@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>404 | Terminal Not Found</title>
+  <link href="https://fonts.cdnfonts.com/css/satoshi?styles=135009,135005" rel="stylesheet">
+  <link rel="stylesheet" href="./lib/WOW-master/css/libs/animate.css">
+  <link rel="stylesheet" href="./lib/bootstrap-5/css/bootstrap.min.css">
+
+  <style>
+    :root {
+      --bg-color: rgb(17, 19, 56);
+      --text-color: rgb(185, 190, 255);
+      --prompt-color: rgb(75, 82, 199);
+      --highlight-color: rgba(75, 82, 199, 0.5);
+      --command-color: rgb(75, 82, 199);
+      --response-color: rgb(185, 190, 255);
+      --font-main: 'Satoshi', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      height: 100%;
+      background-color: var(--bg-color);
+      font-family: var(--font-main);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .terminal {
+      width: 94vw;
+      height: 94vh;
+      background-color: #000000c0;
+      color: var(--text-color);
+      padding: 2rem;
+      border-radius: 10px;
+      border: 1px solid var(--prompt-color);
+      box-shadow: 0 0 30px var(--highlight-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      overflow: hidden;
+      animation: fadeIn 1s ease-in;
+    }
+
+    .terminal-output {
+      flex: 1;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      font-size: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    .terminal-input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: var(--prompt-color);
+      font-size: 1rem;
+      outline: none;
+      font-weight: 500;
+      caret-color: var(--prompt-color);
+    }
+
+    .terminal-input::placeholder {
+      color: rgba(185,190,255,0.4);
+      font-style: italic;
+    }
+
+    .prompt {
+      color: var(--prompt-color);
+      font-weight: bold;
+    }
+
+    .command {
+      color: var(--command-color);
+      font-weight: 500;
+    }
+
+    .response {
+      color: var(--response-color);
+    }
+
+    .blinking-cursor::after {
+      content: "";
+      display: inline-block;
+      width: 8px;
+      height: 1.1em;
+      background-color: var(--prompt-color);
+      animation: blink 1s steps(2, start) infinite;
+      margin-left: 5px;
+      vertical-align: bottom;
+    }
+
+    @keyframes blink {
+      to { visibility: hidden; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="terminal wow fadeIn">
+    <div class="terminal-output" id="output"></div>
+    <div>
+      <span class="prompt">RLPHWKM@web404:~$</span>
+      <input type="text" class="terminal-input blinking-cursor" id="cli-input" autofocus autocomplete="off" placeholder="Type a command..." />
+    </div>
+  </div>
+
+  <!-- WOW + Typing -->
+  <script src="./lib/WOW-master/dist/wow.min.js"></script>
+  <script>new WOW().init();</script>
+
+  <script>
+    const input = document.getElementById('cli-input');
+    const output = document.getElementById('output');
+
+    const commands = {
+      help: `Available commands:
+- home → return to homepage
+- about → learn more about me
+- clear → clear the terminal
+- hint → 🤫 you didn’t hear this from me...`,
+      hint: "Try visiting /you-found-an-easter-egg",
+    };
+
+    const typeLine = async (text = "", prefix = "", isCommand = false) => {
+      const line = document.createElement("div");
+      if (prefix) {
+        line.innerHTML = `<span class="prompt">${prefix}</span>`;
+      }
+
+      const span = document.createElement("span");
+      span.className = isCommand ? "command" : "response";
+      line.appendChild(span);
+      output.appendChild(line);
+
+      let i = 0;
+      return new Promise(resolve => {
+        const typer = setInterval(() => {
+          span.textContent += text[i++];
+          output.scrollTop = output.scrollHeight;
+          if (i >= text.length) {
+            clearInterval(typer);
+            resolve();
+          }
+        }, 20);
+      });
+    };
+
+    const handleCommand = async (cmd) => {
+      await typeLine(cmd, "RLPHWKM@web404:~$", true);
+
+      switch (cmd.toLowerCase()) {
+        case "help":
+          await typeLine(commands.help);
+          break;
+
+        case "hint":
+          await typeLine(commands.hint);
+          break;
+
+        case "clear":
+          output.innerHTML = "";
+          return;
+
+        case "home":
+          await typeLine("Redirecting to homepage...");
+          setTimeout(() => window.location.href = './index.html', 1000);
+          break;
+
+        case "about":
+          await typeLine("Redirecting to #about...");
+          setTimeout(() => window.location.href = './index.html#about', 1000);
+          break;
+
+        default:
+          await typeLine(`command not found: ${cmd}`);
+      }
+    };
+
+    let history = [];
+    let historyIndex = -1;
+
+    input.addEventListener("keydown", async function(e) {
+      if (e.key === "Enter") {
+        const cmd = input.value.trim();
+        if (cmd !== "") {
+          history.push(cmd);
+          historyIndex = history.length;
+        }
+        input.value = "";
+        await handleCommand(cmd);
+      } else if (e.key === "ArrowUp") {
+        if (historyIndex > 0) {
+          historyIndex--;
+          input.value = history[historyIndex];
+        }
+        e.preventDefault();
+      } else if (e.key === "ArrowDown") {
+        if (historyIndex < history.length - 1) {
+          historyIndex++;
+          input.value = history[historyIndex];
+        } else {
+          historyIndex = history.length;
+          input.value = "";
+        }
+        e.preventDefault();
+      }
+    });
+
+    // Intro
+    (async () => {
+      await typeLine("Welcome to rlphwkm terminal.");
+      await typeLine("If you ended up being here, it means you tried to access a page that does not exist.");
+      await typeLine("This is Ralph's way of making the 404 error page, hacker style.");
+      await typeLine("Now, wild adventurer, you have to figure your way out of here.");
+      await typeLine("Type 'help' to get started.");
+    })();
+  </script>
+</body>
+</html>
