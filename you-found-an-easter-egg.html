@@ -110,21 +110,25 @@
   <script>
     const input = document.getElementById('cli-input');
     const output = document.getElementById('output');
-  
+
     let stage = 0;
     let loginStep = 0;
     let enteredUsername = "";
-  
+
     const commands = {
       help: `Available commands:
-  - help → show available commands
-  - clear → clear the terminal
-  - login → begin hacking sequence
-  - quit → exit the game
-  - hint → need a little push?`,
+- help → show available commands
+- clear → clear the terminal
+- login → begin hacking sequence
+- ls → check out what files are in the directory
+- cat → open a file
+- nmap → use the nmap tool
+- ssh → use ssh
+- quit → exit the game
+- hint → need a little push?`,
       hint: "Stage 1: Try logging in with a strong password... something super strong 😉",
     };
-  
+
     const typeLine = async (text = "", prefix = "", isCommand = false) => {
       const line = document.createElement("div");
       if (prefix) line.innerHTML = `<span class="prompt">${prefix}</span>`;
@@ -144,17 +148,19 @@
         }, 20);
       });
     };
-  
+
     const resetLogin = async () => {
-      loginStep = 0;
+      loginStep = 1;
+      stage = 1;
       enteredUsername = "";
-      await typeLine("Login reset. Type 'login' to try again.");
+      await typeLine("Login reset.");
+      await typeLine("Enter username:");
     };
-  
+
     const handleCommand = async (cmd) => {
       await typeLine(cmd, "RLPHWKM@terminal:~$", true);
       const normalized = cmd.trim().toLowerCase();
-  
+
       // Global commands
       if (normalized === "clear") {
         output.innerHTML = "";
@@ -174,7 +180,7 @@
         window.location.href = "./";
         return;
       }
-  
+
       // Stage 0: Start login
       if (stage === 0) {
         if (normalized === "login") {
@@ -186,7 +192,7 @@
         }
         return;
       }
-  
+
       // Stage 1: Login authentication
       if (stage === 1) {
         if (loginStep === 1) {
@@ -209,7 +215,7 @@
           return;
         }
       }
-  
+
       // Stage 2: File system exploration
       if (stage === 2) {
         if (normalized === "ls") {
@@ -228,7 +234,7 @@
         }
         return;
       }
-  
+
       // Stage 3: Port scanning and SSH
       if (stage === 3) {
         if (normalized === "nmap localhost") {
@@ -256,14 +262,14 @@
         }
         return;
       }
-  
+
       // Fallback for unexpected behavior
       await typeLine("Unknown command. Type 'help' if you’re stuck.");
     };
-  
+
     let history = [];
     let historyIndex = -1;
-  
+
     input.addEventListener("keydown", async function(e) {
       if (e.key === "Enter") {
         const cmd = input.value.trim();
@@ -290,7 +296,7 @@
         e.preventDefault();
       }
     });
-  
+
     (async () => {
       await typeLine("Unauthorized access detected.");
       await typeLine("You're now inside the rlphwkm terminal.");
@@ -298,6 +304,5 @@
       await typeLine("Type 'help' to begin.");
     })();
   </script>
-  
 </body>
 </html>
