@@ -116,7 +116,6 @@
     let loginStep = 0;
     let enteredUsername = "";
 
-    // FILE SYSTEM (EASY TO EXTEND)
     const files = {
       "index.html": "Basic web index file.",
       "secret.txt": "The code is: R3D_H34RT",
@@ -125,20 +124,33 @@
 
     const commands = {
       help: `Available commands:
-- help → show available commands
-- clear → clear the terminal
+- help → show commands
+- tutorial → show game tutorial
+- clear → clear terminal
 - login → begin hacking sequence
 - ls → list files
 - cat <file> → read a file
-- use <code> → use the secret
-- nmap <target> → scan ports
+- use <code> → use secret
+- nmap <target> → port scan
 - ssh <user@host> → connect
-- quit → exit the game
-- hint → give hint`,
-      hint: "Stage 1: Username then password. Password uses letters+numbers only."
+- quit → exit
+- hint → context hint`,
+      hint: "Stage 1: username → password. Password uses letters+numbers only.",
+      tutorial: `TUTORIAL:
+This terminal is a staged hacking simulation.
+Progress is linear. Commands change meaning per stage.
+
+Core commands:
+- login → start auth challenge
+- ls / cat → file enumeration
+- use <secret> → unlock next stage
+- nmap / ssh → network pivot
+- sqlmap, inject, wireless → appear in later levels
+
+Type 'help' anytime for verbs, 'tutorial' for gameplay instructions.`
     };
 
-    // Typewriter output
+    // Typewriter function
     const typeLine = async (text = "", prefix = "", isCommand = false) => {
       const line = document.createElement("div");
       if (prefix) line.innerHTML = `<span class="prompt">${prefix}</span>`;
@@ -175,13 +187,17 @@
 
       await typeLine(cmd, "RLPHWKM@terminal:~$", true);
 
-      // GLOBAL
+      // GLOBAL COMMANDS
       if (normalized === "clear") {
         output.innerHTML = "";
         return;
       }
       if (normalized === "help") {
         await typeLine(commands.help);
+        return;
+      }
+      if (normalized === "tutorial") {
+        await typeLine(commands.tutorial);
         return;
       }
       if (normalized === "hint") {
@@ -195,7 +211,7 @@
         return;
       }
 
-      // STAGE 0: Await login
+      // ========= STAGE 0: LOGIN NOT STARTED =========
       if (stage === 0) {
         if (normalized === "login") {
           stage = 1;
@@ -207,7 +223,7 @@
         return;
       }
 
-      // STAGE 1: LOGIN PROCESS
+      // ========= STAGE 1: LOGIN PROCESS =========
       if (stage === 1) {
         if (loginStep === 1) {
           enteredUsername = cmd;
@@ -231,7 +247,7 @@
         }
       }
 
-      // STAGE 2: FILE EXPLORATION
+      // ========= STAGE 2: FILE ENUMERATION =========
       if (stage === 2) {
         if (normalized === "ls") {
           await typeLine(Object.keys(files).join("  "));
@@ -261,11 +277,11 @@
         return;
       }
 
-      // STAGE 3: NMAP + SSH
+      // ========= STAGE 3: NMAP → SSH =========
       if (stage === 3) {
         if (normalized === "nmap localhost") {
-          await typeLine("Starting Nmap 7.93...");
-          await new Promise(r => setTimeout(r, 1000));
+          await typeLine("Starting Nmap scan...");
+          await new Promise(r => setTimeout(r, 800));
           await typeLine("PORT     STATE  SERVICE");
           await typeLine("22/tcp   open   ssh");
           await typeLine("80/tcp   open   http");
@@ -277,11 +293,12 @@
 
         if (normalized === "ssh root@localhost -p 22") {
           await typeLine("Establishing connection...");
-          await new Promise(r => setTimeout(r, 1500));
-          await typeLine("Access granted.");
-          await typeLine("");
-          await typeLine("🎉 Game complete.");
-          await typeLine("You have successfully hacked the system.");
+          await new Promise(r => setTimeout(r, 1200));
+          await typeLine("SSH connected.");
+          stage = 4;
+          await typeLine("Level 3 complete.");
+          await typeLine("Next: SQL injection challenge unlocked.");
+          await typeLine("Try: inject ' OR '1'='1");
           return;
         }
 
@@ -289,7 +306,48 @@
         return;
       }
 
-      // FALLBACK
+      // ========= STAGE 4: SQL INJECTION =========
+      if (stage === 4) {
+        if (normalized.startsWith("inject ")) {
+          const payload = cmdRaw.slice(7);
+          if (payload.includes("'1'='1")) {
+            await typeLine("SQL injection successful.");
+            stage = 5;
+            await typeLine("Level 4 complete. Wireless attack tools unlocked.");
+            await typeLine("Try: wireless-scan");
+          } else {
+            await typeLine("Injection failed. Payload rejected.");
+          }
+          return;
+        }
+
+        await typeLine("command not found.");
+        return;
+      }
+
+      // ========= STAGE 5: WIRELESS CRACKING =========
+      if (stage === 5) {
+        if (normalized === "wireless-scan") {
+          await typeLine("Scanning for access points...");
+          await new Promise(r => setTimeout(r, 1200));
+          await typeLine("Found target: NETGEAR_5G_SECURE (WPA2)");
+          await typeLine("");
+          await typeLine("Try: crack-netgear <wordlist>");
+          return;
+        }
+
+        if (normalized.startsWith("crack-netgear")) {
+          await typeLine("Running WPA2 handshake attack...");
+          await new Promise(r => setTimeout(r, 1500));
+          await typeLine("Key found: toorwifi123");
+          await typeLine("You have completed the game.");
+          return;
+        }
+
+        await typeLine("command not found.");
+        return;
+      }
+
       await typeLine("Unknown command.");
     };
 
@@ -328,12 +386,11 @@
       }
     });
 
-    // INTRO TEXT
     (async () => {
       await typeLine("Unauthorized access detected.");
       await typeLine("You're inside the rlphwkm terminal.");
-      await typeLine("If you're a hacker, you'll find your way out...");
-      await typeLine("Type 'help' to begin.");
+      await typeLine("If you're a hacker, navigate the system...");
+      await typeLine("Type 'help' to begin or 'tutorial' for instructions.");
     })();
   </script>
 </body>
