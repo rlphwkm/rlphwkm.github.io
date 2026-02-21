@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="description" content="A brief description of this specific blog post for search engines.">
+    <meta name="author" content="Ralph Wakim (rlphwkm)">
+    
+    <title>Post Title | Ralph Wakim (rlphwkm)</title>
+
+    <link href="https://fonts.cdnfonts.com/css/satoshi?styles=135009,135005,135007,135002,135000" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <style>
+        /* Custom Cursors - paths go up two levels to reach the root assets folder */
+        body, html {
+            cursor: url('../../assets/cursors/normal_blue.cur'), auto !important;
+            background-color: #050505;
+            color: #ffffff;
+            font-family: 'Satoshi', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+        }
+        a:hover, button:hover, .hover-cursor:hover {
+            cursor: url('../../assets/cursors/hover_blue.cur'), pointer !important;
+        }
+
+        /* Branding Colors */
+        :root {
+            --brand-color: rgb(75, 82, 199);
+            --brand-color-hover: rgb(95, 102, 219);
+            --card-bg: #111111;
+            --card-border: rgba(75, 82, 199, 0.3);
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.9) !important;
+            border-bottom: 1px solid var(--card-border);
+        }
+        .navbar-brand img { width: 40px; }
+        .nav-link { color: #fff !important; font-weight: 500; transition: 0.3s; }
+        .nav-link:hover { color: var(--brand-color) !important; }
+
+        /* Article Styling */
+        .article-header {
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+        .article-meta {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        .article-meta span {
+            margin-right: 15px;
+        }
+        .article-meta i {
+            color: var(--brand-color);
+            margin-right: 5px;
+        }
+        
+        /* Typography inside the post */
+        .post-content h2, .post-content h3, .post-content h4 {
+            color: var(--brand-color);
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        .post-content p {
+            color: #cccccc;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        .post-content ul, .post-content ol {
+            color: #cccccc;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        .post-content li {
+            margin-bottom: 10px;
+        }
+        
+        /* Code Blocks */
+        pre {
+            background-color: #1a1a1a;
+            border: 1px solid var(--card-border);
+            border-left: 4px solid var(--brand-color);
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            color: #00ffcc; /* Terminal green/cyan color for hacker vibe */
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* Blockquotes */
+        blockquote {
+            background-color: var(--card-bg);
+            border-left: 4px solid var(--brand-color);
+            padding: 20px;
+            margin: 30px 0;
+            font-style: italic;
+            color: #aaa;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Buttons */
+        .btn-back {
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: transparent;
+            color: var(--brand-color);
+            border: 1px solid var(--brand-color);
+            border-radius: 30px;
+            text-decoration: none;
+            transition: 0.3s;
+            margin-top: 40px;
+        }
+        .btn-back:hover {
+            background-color: var(--brand-color);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="../../index.html">
+                <h4 style="color: rgb(75, 82, 199); margin: 0;">RLPHWKM</h4>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fas fa-bars" style="color: white;"></i>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="../../index.html">Main Site</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Blog Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5" style="max-width: 800px;">
+        
+        <div class="article-header text-center">
+            <div class="article-meta text-center">
+                <span><i class="far fa-calendar-alt"></i> October 12, 2024</span>
+                <span><i class="fas fa-user-shield"></i> Ralph Wakim</span>
+                <span><i class="fas fa-tag"></i> Blue Team / Home Lab</span>
+            </div>
+            <h1 class="display-5 fw-bold" style="color: white;">Wazuh SIEM Management & Deployment</h1>
+        </div>
+
+        <article class="post-content">
+            <p>Welcome to my write-up on deploying Wazuh in a homelab environment. In this post, I will walk you through the architecture, the installation process using VMware, and how to start collecting logs.</p>
+
+            <h2>1. Why Wazuh?</h2>
+            <p>Wazuh is a free, open-source security monitoring solution that collects, aggregates, indexes, and analyzes security data. It's incredibly powerful for both host-based intrusion detection (HIDS) and log analysis.</p>
+
+            <blockquote>
+                "Visibility is the foundation of security. You cannot protect what you cannot see."
+            </blockquote>
+
+            <h2>2. Setting up the Environment</h2>
+            <p>Before deploying the manager, you need to ensure your virtual environment is ready. Here are the specs I used for my VMware instance:</p>
+            <ul>
+                <li><strong>OS:</strong> Ubuntu 22.04 LTS</li>
+                <li><strong>RAM:</strong> 8GB minimum (16GB recommended)</li>
+                <li><strong>CPU:</strong> 4 vCPUs</li>
+                <li><strong>Storage:</strong> 100GB SSD</li>
+            </ul>
+
+            <h2>3. Installation Commands</h2>
+            <p>To install the Wazuh indexer, server, and dashboard, you can use the automated installation assistant. Run the following command in your terminal:</p>
+
+            <pre><code>curl -sO https://packages.wazuh.com/4.5/wazuh-install.sh
+curl -sO https://packages.wazuh.com/4.5/wazuh-install-files.tar
+bash wazuh-install.sh -a</code></pre>
+
+            <p>Once the installation finishes, the script will output the credentials to access the web interface. Make sure to save these in a secure password manager.</p>
+
+            <h2>Conclusion</h2>
+            <p>Setting up a SIEM is a continuous process. In my next post, I'll dive into creating custom rules and building dashboards for specific OSINT feeds. Stay tuned.</p>
+        </article>
+
+        <div class="text-center border-top mt-5 pt-4" style="border-color: var(--card-border) !important;">
+            <a href="../index.html" class="btn-back"><i class="fas fa-arrow-left me-2"></i> Back to All Posts</a>
+        </div>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
