@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wazuh SIEM Management in a Homelab | rlphwkm</title>
+    
+    <link href="https://fonts.cdnfonts.com/css/satoshi?styles=135009,135005,135007,135002,135000" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="./lib/bootstrap-5/css/bootstrap.min.css">
+    
+    <style>
+        /* Base Theme */
+        body {
+            background-color: #0d0d12;
+            color: #d1d1e0;
+            font-family: 'Satoshi', sans-serif;
+            cursor: url('./assets/cursors/normal_blue.cur'), auto;
+            line-height: 1.8;
+        }
+        
+        a:hover, button:hover {
+            cursor: url('./assets/cursors/hover_blue.cur'), pointer;
+        }
+
+        .text-accent { color: rgb(75, 82, 199); }
+        .bg-accent { background-color: rgb(75, 82, 199); }
+
+        /* Navbar Styling */
+        .navbar { background-color: rgba(13, 13, 18, 0.95); border-bottom: 1px solid #222; }
+        .nav-link { color: #fff !important; transition: color 0.3s ease; }
+        .nav-link:hover { color: rgb(75, 82, 199) !important; }
+
+        /* Article Header */
+        .article-header {
+            margin-top: 50px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #2a2a35;
+            padding-bottom: 30px;
+        }
+        .article-title {
+            color: #ffffff;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .article-meta {
+            font-size: 0.9rem;
+            color: #888;
+        }
+        .category-badge {
+            background-color: rgba(75, 82, 199, 0.1);
+            color: rgb(75, 82, 199);
+            padding: 5px 12px;
+            border-radius: 4px;
+            border: 1px solid rgb(75, 82, 199);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-right: 15px;
+        }
+
+        /* Article Content Typography */
+        .article-content h2 {
+            color: #ffffff;
+            font-weight: bold;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        .article-content h3 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        .article-content p {
+            margin-bottom: 20px;
+        }
+        .article-content img {
+            max-width: 100%;
+            border-radius: 8px;
+            border: 1px solid #2a2a35;
+            margin: 30px 0;
+        }
+
+        /* Technical Elements: Code & Quotes */
+        .article-content pre {
+            background-color: #08080c;
+            border: 1px solid #2a2a35;
+            border-left: 4px solid rgb(75, 82, 199);
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            color: #a9b7c6;
+            font-family: 'Courier New', Courier, monospace;
+            margin-bottom: 30px;
+        }
+        .article-content code {
+            background-color: #1a1a24;
+            color: rgb(130, 138, 255);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+        }
+        .article-content blockquote {
+            background-color: #15151e;
+            border-left: 4px solid rgb(75, 82, 199);
+            padding: 20px;
+            margin: 30px 0;
+            font-style: italic;
+            color: #b0b0c0;
+        }
+
+        /* Author Box */
+        .author-box {
+            background-color: #15151e;
+            border: 1px solid #2a2a35;
+            border-radius: 8px;
+            padding: 30px;
+            margin-top: 60px;
+            margin-bottom: 60px;
+            display: flex;
+            align-items: center;
+        }
+        .author-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid rgb(75, 82, 199);
+            margin-right: 25px;
+        }
+        
+        /* Navigation Buttons */
+        .btn-back {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 25px;
+            background-color: transparent;
+            border: 1px solid rgb(75, 82, 199);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        .btn-back:hover {
+            background-color: rgb(75, 82, 199);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand text-white fw-bold" href="./index.html">
+                RLPH<span class="text-accent">WKM</span>
+            </a>
+            <div class="collapse navbar-collapse justify-content-end">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="./index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./blog.html">Blog & Intel</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                
+                <div class="mt-5">
+                    <a href="./blog.html" class="btn-back"><i class="fas fa-arrow-left me-2"></i> Back to Database</a>
+                </div>
+
+                <header class="article-header">
+                    <span class="category-badge">SIEM / Homelab</span>
+                    <h1 class="article-title mt-3">Wazuh SIEM Management in a Local Environment</h1>
+                    <div class="article-meta mt-3">
+                        <span><i class="far fa-calendar-alt me-2"></i> November 12, 2025</span>
+                        <span class="ms-4"><i class="far fa-clock me-2"></i> 5 min read</span>
+                    </div>
+                </header>
+
+                <article class="article-content">
+                    <p class="lead" style="color: #fff; font-size: 1.2rem;">Deploying a Security Information and Event Management (SIEM) system in a homelab is one of the best ways to get hands-on experience with SOC analysis and incident response.</p>
+                    
+                    <p>When building my local environment, I chose Wazuh because it provides an excellent open-source platform for threat detection, integrity monitoring, and incident response. This guide breaks down my deployment strategy using VMware.</p>
+
+                    <h2>The Architecture</h2>
+                    <p>I structured my network to isolate the logging environment from the general homelab traffic. The core component is the Wazuh server, which aggregates logs from various agents installed on both Linux and Windows virtual machines.</p>
+
+                    <blockquote>
+                        "Effective logging isn't just about collecting data; it's about making that data actionable." 
+                    </blockquote>
+
+                    <h3>Installing the Wazuh Agent</h3>
+                    <p>Installing the agent on a target Debian/Ubuntu machine is straightforward. You can deploy it using the official repository or via a direct <code>curl</code> command. Here is an example of the command used to install the agent:</p>
+
+<pre><code>wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.4.1-1_amd64.deb
+sudo WAZUH_MANAGER='10.0.0.50' dpkg -i wazuh-agent_4.4.1-1_amd64.deb
+sudo systemctl daemon-reload
+sudo systemctl enable wazuh-agent
+sudo systemctl start wazuh-agent</code></pre>
+
+                    <p>Notice that we define the <code>WAZUH_MANAGER</code> environment variable directly inline so the agent knows exactly where to report its logs.</p>
+
+                    <h2>Dashboard & Rule Creation</h2>
+                    <p>Once the logs started flowing in, the next step was writing custom decoders and rules. By default, Wazuh maps common attack vectors, but building custom rules helps tailor the alerts to your specific environment.</p>
+
+                    <ul>
+                        <li><strong>Level 3 Alerts:</strong> Standard authentication failures.</li>
+                        <li><strong>Level 7 Alerts:</strong> Suspicious administrative access.</li>
+                        <li><strong>Level 10+ Alerts:</strong> Active exploitation attempts or malware detection.</li>
+                    </ul>
+
+                    <p>This setup gave me incredible visibility into what was happening across my network.</p>
+
+                </article>
+
+                <div class="author-box">
+                    <img src="./assets/images/favicon.png" alt="Ralph Wakim" class="author-img" style="background-color: #fff;">
+                    <div>
+                        <h4 class="text-white mb-1">Ralph Wakim</h4>
+                        <p class="mb-0 text-muted" style="font-size: 0.9rem;">Cybersecurity specialist focused on OSINT, digital protection, and public safety solutions. Currently building tools and hunting threats in the digital landscape.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
