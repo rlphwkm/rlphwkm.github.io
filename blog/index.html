@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Ralph Wakim (rlphwkm)</title>
+
+    <link href="https://fonts.cdnfonts.com/css/satoshi?styles=135009,135005,135007,135002,135000" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <style>
+        /* Custom Cursors from your main site */
+        body, html {
+            cursor: url('../assets/cursors/normal_blue.cur'), auto !important;
+            background-color: #050505;
+            color: #ffffff;
+            font-family: 'Satoshi', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        a:hover, button:hover, .hover-cursor:hover {
+            cursor: url('../assets/cursors/hover_blue.cur'), pointer !important;
+        }
+
+        /* Branding Colors */
+        :root {
+            --brand-color: rgb(75, 82, 199);
+            --brand-color-hover: rgb(95, 102, 219);
+            --card-bg: #111111;
+            --card-border: rgba(75, 82, 199, 0.3);
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.9) !important;
+            border-bottom: 1px solid var(--card-border);
+        }
+        .navbar-brand img { width: 40px; }
+        .nav-link { color: #fff !important; font-weight: 500; transition: 0.3s; }
+        .nav-link:hover { color: var(--brand-color) !important; }
+
+        /* Search Bar Styling */
+        .search-container {
+            margin: 40px auto;
+            max-width: 600px;
+            position: relative;
+        }
+        .search-container input {
+            width: 100%;
+            padding: 15px 20px 15px 45px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 30px;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+        .search-container input:focus {
+            border-color: var(--brand-color);
+            box-shadow: 0 0 10px rgba(75, 82, 199, 0.5);
+        }
+        .search-container i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--brand-color);
+        }
+
+        /* Blog Post Cards */
+        .blog-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: 0.3s;
+        }
+        .blog-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--brand-color);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+        .blog-card h3 {
+            color: var(--brand-color);
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        .blog-card p { color: #cccccc; margin-bottom: 15px; }
+        .blog-card .meta {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 15px;
+        }
+        .blog-card .read-more {
+            display: inline-block;
+            padding: 8px 20px;
+            background-color: transparent;
+            color: var(--brand-color);
+            border: 1px solid var(--brand-color);
+            border-radius: 20px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .blog-card .read-more:hover {
+            background-color: var(--brand-color);
+            color: #fff;
+        }
+
+        /* Preloader */
+        .preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background-color: rgb(0, 0, 0); color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 9999; text-align: center;
+        }
+        .spinner {
+            margin: 30px auto 0; width: 40px; height: 40px;
+            border: 4px solid rgba(255,255,255,0.2);
+            border-top: 4px solid var(--brand-color);
+            border-radius: 50%; animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <h4 style="color: rgb(75, 82, 199); margin: 0;">RLPHWKM</h4>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fas fa-bars" style="color: white;"></i>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Main Site</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Blog Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <div class="text-center mb-5">
+            <h1 class="display-4" style="color: white;">Security <span style="color: rgb(75, 82, 199);">Blog</span></h1>
+            <p class="lead" style="color: #aaa;">Thoughts, OSINT write-ups, and cybersecurity insights.</p>
+        </div>
+
+        <div class="search-container">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Search for keywords, tools, or topics...">
+        </div>
+
+        <div class="row" id="blog-container">
+            </div>
+        
+        <div id="no-results" class="text-center mt-5" style="display: none; color: #888;">
+            <i class="fas fa-ghost fa-3x mb-3"></i>
+            <h3>No records found.</h3>
+            <p>Try searching for different keywords.</p>
+        </div>
+    </main>
+
+    <script>
+        // 1. Remove Preloader when page loads
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('preloader').style.display = 'none';
+            }, 800); // Small delay for visual effect
+        });
+
+        // ======================================================================
+        // 2. YOUR BLOG DATABASE
+        // Every time you upload a new post, just copy one of these blocks {}
+        // and fill in the new information. 
+        // ======================================================================
+        const blogPosts = [
+            {
+                title: "Wazuh SIEM Management & Deployment",
+                date: "October 12, 2024",
+                description: "A comprehensive guide on how I deployed and managed a SIEM system in my homelab using VMware.",
+                link: "./posts/template-post.html",
+                keywords: "wazuh siem soc vmware homelab rules dashboard cybersecurity"
+            },
+            {
+                title: "Advanced OSINT Frameworks",
+                date: "September 05, 2024",
+                description: "Exploring the best open-source intelligence frameworks available for data analysis.",
+                link: "./posts/post-template.html",
+                keywords: "osint investigation tracking framework data analysis privacy"
+            },
+            {
+                title: "Securing Communications: The Basics",
+                date: "August 21, 2024",
+                description: "Why multiple layers of security dispersed across devices and networks is crucial.",
+                link: "./posts/post-sample.html",
+                keywords: "communications security network devices encryption"
+            }
+        ];
+
+        // 3. Engine that builds the page and handles search
+        const blogContainer = document.getElementById('blog-container');
+        const searchInput = document.getElementById('searchInput');
+        const noResults = document.getElementById('no-results');
+
+        function renderPosts(filterText = "") {
+            blogContainer.innerHTML = ""; // Clear current posts
+            let matchCount = 0;
+            const query = filterText.toLowerCase();
+
+            blogPosts.forEach(post => {
+                // Check if search query matches title, description, or hidden keywords
+                if (post.title.toLowerCase().includes(query) || 
+                    post.description.toLowerCase().includes(query) || 
+                    post.keywords.toLowerCase().includes(query)) {
+                    
+                    matchCount++;
+                    
+                    // Create HTML for the post
+                    const postHTML = `
+                        <div class="col-md-6 mb-4">
+                            <div class="blog-card h-100">
+                                <div class="meta"><i class="far fa-calendar-alt"></i> ${post.date}</div>
+                                <h3>${post.title}</h3>
+                                <p>${post.description}</p>
+                                <a href="${post.link}" class="read-more">Read Article <i class="fas fa-arrow-right ms-2"></i></a>
+                            </div>
+                        </div>
+                    `;
+                    blogContainer.insertAdjacentHTML('beforeend', postHTML);
+                }
+            });
+
+            // Show or hide the "No Results" message
+            if (matchCount === 0) {
+                noResults.style.display = "block";
+            } else {
+                noResults.style.display = "none";
+            }
+        }
+
+        // Initial render when page loads
+        renderPosts();
+
+        // Listen for user typing in the search bar
+        searchInput.addEventListener('input', function(e) {
+            renderPosts(e.target.value);
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
